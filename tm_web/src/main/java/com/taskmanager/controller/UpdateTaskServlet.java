@@ -26,10 +26,23 @@ public class UpdateTaskServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: implement /edit-task doGet
+        //var requestDispatcher = request.getRequestDispatcher("WEB-INF/pages/edit-task.jsp");
+        int taskId = Integer.parseInt(request.getParameter("id"));
+        Task task1 = taskRepository.read(taskId);
+/*        if(task1==null){*/
+        request.setAttribute("message", "Task with ID " + taskId + " not found!");
+        request.setAttribute("url", request.getContextPath() + "/edit-task?id=" + taskId);
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/pages/error.jsp");
+        requestDispatcher.forward(request, response);
+/*        }else {
+            request.setAttribute("task",task1);
+            requestDispatcher.forward(request,response);
+        }*/
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: implement /edit-task doPost
+
     }
 }
