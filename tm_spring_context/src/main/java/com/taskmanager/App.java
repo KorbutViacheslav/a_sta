@@ -1,13 +1,12 @@
 package com.taskmanager;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World2!" );
+import com.taskmanager.config.ConfigApp;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+
+public class App {
+    public static void main( String[] args ) {
+        final var context = new AnnotationConfigApplicationContext(ConfigApp.class);
+        context.close();
     }
 }
