@@ -17,14 +17,12 @@ public class TaskRepository {
     }
 
     public boolean create(Task task) {
-        boolean status = listOfTask.stream().anyMatch(t -> t.getTitle().equals(task.getTitle()));
-        if (!status) {
+        if (!isTaskTitleTaken(task.getTitle())) {
             listOfTask.add(task);
             return true;
-        } else {
-            return false;
         }
 
+        return false;
     }
 
     public Task read(int id) {
@@ -32,8 +30,8 @@ public class TaskRepository {
     }
 
     public boolean update(Task newTask) {
-        // TODO: implement update
-        return false;
+        int index = newTask.getId();
+        return listOfTask.set(index, newTask) != null;
     }
 
     public boolean delete(int id) {
