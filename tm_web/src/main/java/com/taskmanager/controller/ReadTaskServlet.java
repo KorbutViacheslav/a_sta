@@ -1,7 +1,6 @@
 package com.taskmanager.controller;
 
 
-
 import com.taskmanager.model.Task;
 import com.taskmanager.repository.TaskRepository;
 import jakarta.servlet.RequestDispatcher;
@@ -24,6 +23,11 @@ public class ReadTaskServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: implement   /read-task doGet
+        int taskId = Integer.parseInt(request.getParameter("id"));
+        Task task = taskRepository.read(taskId);
+
+        request.setAttribute("task", task);
+        var requestDispatcher = request.getRequestDispatcher("/WEB-INF/pages/read-task.jsp");
+        requestDispatcher.forward(request, response);
     }
 }
