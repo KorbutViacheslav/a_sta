@@ -29,10 +29,11 @@ public class TaskRepository {
         return listOfTask.stream().filter(task -> task.getId() == id).findFirst().orElse(null);
     }
 
-    public boolean update(Task newTask) {
-        int index = newTask.getId();
-        return listOfTask.set(index, newTask) != null;
+    public boolean update(Task task, int id) {
+        int index = listOfTask.indexOf(read(id));
+        return listOfTask.set(index, task) != null;
     }
+
 
     public boolean delete(int id) {
         Task task = read(id);
