@@ -1,7 +1,6 @@
 package com.taskmanager.repository;
 
 
-
 import com.taskmanager.model.Priority;
 import com.taskmanager.model.Task;
 
@@ -18,7 +17,11 @@ public class TaskRepository {
     }
 
     public boolean create(Task task) {
-        // TODO: implement create
+        if (!isTaskTitleTaken(task.getTitle())) {
+            listOfTask.add(task);
+            return true;
+        }
+
         return false;
     }
 
@@ -26,10 +29,11 @@ public class TaskRepository {
         return listOfTask.stream().filter(task -> task.getId() == id).findFirst().orElse(null);
     }
 
-    public boolean update(Task newTask) {
-        // TODO: implement update
-        return false;
+    public boolean update(Task task, int id) {
+        int index = listOfTask.indexOf(read(id));
+        return listOfTask.set(index, task) != null;
     }
+
 
     public boolean delete(int id) {
         Task task = read(id);
@@ -55,6 +59,7 @@ public class TaskRepository {
         }
         return taskRepository;
     }
+
     public boolean isTaskTitleTaken(String title) {
         return listOfTask.stream().anyMatch(task -> task.getTitle().equals(title));
     }
