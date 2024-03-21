@@ -1,11 +1,10 @@
    delete from todo_collaborator;
--- delete from tasks;
+   delete from tasks;
    delete from todos;
--- delete from states;
+   delete from states;
    delete from users;
    delete from roles;
 
--- TODO: uncomment task and state
 
 
 INSERT INTO roles (id, name) VALUES (1, 'ADMIN');

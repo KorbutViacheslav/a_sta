@@ -36,5 +36,16 @@ public class ToDo {
     @JoinColumn(name = "owner_id", referencedColumnName="id", insertable=false, updatable=false)
     private User owner;
 
+    @OneToMany(mappedBy = "todo",fetch = FetchType.LAZY)
+    private List<Task> tasks;
 
+    @Override
+    public String toString() {
+        return "ToDo{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", createdAt=" + createdAt +
+                ", owner=" + owner +
+                '}';
+    }
 }
