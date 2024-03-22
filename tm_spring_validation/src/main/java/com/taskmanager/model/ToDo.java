@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -36,16 +37,7 @@ public class ToDo {
     @JoinColumn(name = "owner_id", referencedColumnName="id", insertable=false, updatable=false)
     private User owner;
 
-    @OneToMany(mappedBy = "todo",fetch = FetchType.LAZY)
-    private List<Task> tasks;
+    @OneToMany(mappedBy = "toDo", cascade = CascadeType.ALL)
+    private List<Task> taskList = new LinkedList<>();
 
-    @Override
-    public String toString() {
-        return "ToDo{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", createdAt=" + createdAt +
-                ", owner=" + owner +
-                '}';
-    }
 }
